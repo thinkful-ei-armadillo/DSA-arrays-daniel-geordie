@@ -84,11 +84,11 @@ function main(){
   arr.push(19);
   arr.push(45);
   arr.push(10);
-  // remove from array
+  // // remove from array
   arr.pop();
   arr.pop();
   arr.pop();
-  // clear array and insert 'tauhida'
+  // // clear array and insert 'tauhida'
   arr.pop();
   arr.pop();
   arr.insert(0, 'tauhida');
@@ -97,7 +97,7 @@ function main(){
   console.log(memory.get(3));
 }
 
-main();
+// main();
 
 // 2. Array { length: 1, _capacity: 3, ptr: 0 }
 // after series of pushes -- Array { length: 6, _capacity: 12, ptr: 3 }
@@ -116,7 +116,7 @@ main();
 
 //5. urlify
 const test = 'tauhida parveen';
-const test2 = 'httsp://thinkful.com/ tau hida par veen'
+const test2 = 'httsp://thinkful.com/ tau hida par veen';
 function urlify(string) {
   let array = string.split('');
   for(let i = 0; i < array.length; i++) {
@@ -132,13 +132,135 @@ function urlify(string) {
 
 //6. filter method
 function myFilter(array, filterKey) {
+  let result = [];
   for(let i = 0; i < array.length; i++) {
-    if(array[i] < filterKey) {
+    if(array[i] > filterKey) {
       console.log(`filering at ${i}`);
-      array.slice(i, i+1);
+      result.push(array[i]);
     }
   }
-  return array;
+  return result;
+}
+// console.log(myFilter([1,2,3,4,5,6,1,2,3,5,2,8,4,5,10], 5));
+
+// linear complexity - depends on the length of the input due to a single for loop run through its contents. O(n)
+
+// 7. max sum
+
+const sumThis = [4, 6, -3, 5, -2, 1];
+
+function maxSum(arr) {
+  let result = 0;
+  for (let i = 0; i < arr.length-1; i++) {
+    if (arr[i] + arr[i+1] > result) {
+      result = (arr[i] + arr[i+1]);
+    }
+    if (arr[i] + arr[i+1] + arr[i+2] > result) {
+      result = (arr[i] + arr[i+1] + arr[i+2]);
+    }
+    if (arr[i] + arr[i+1] + arr[i+2] + arr[i+3] > result) {
+      result = (arr[i] + arr[i+1] + arr[i+2] + arr[i+3]);
+    }
+  }
+  return result;
 }
 
-console.log(myFilter([1,2,3,4,5,6,1,2,3,5,2,8,4,5,10], 5));
+// console.log(maxSum(sumThis));
+// linear complexity - depends on the length of the input due to a single for loop run through its contents. O(n)
+
+// 8. merge arrays
+
+const array1 = [1, 3, 6, 8, 11];
+const array2 = [2, 3, 5, 8, 9, 10];
+
+function mergeMe(arr1, arr2) {
+  let result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    result.push(arr1[i]);
+  }
+  for (let i = 0; i < arr2.length; i++) {
+    result.push(arr2[i]);
+  }
+  return result.sort();
+}
+
+// console.log(mergeMe(array1, array2));
+// this function has two separate for loops dependent on the length of two separate inputs -- meaning that it has
+// polynomial complexity. O(n^k)
+// if may be able to be improved by using a single length definition and pushing individual values at a time based
+// on their integer value against each from the other array at a given index -- using just one for loop, making it O(n).
+
+// 9. remove chars
+
+const text = 'Battle of the Vowels: Hawaii vs. Grozny';
+const key = 'aeiou';
+
+function removeThis(str, bye) {
+  let arrResult = [];
+  let strResult = '';
+  for (let i = 0; i < str.length; i++) {
+    arrResult.push(str[i]);
+  }
+  for (let i = 0; i < arrResult.length; i++) {
+    for (let j = 0; j < bye.length; j++) {
+      if (arrResult[i] === bye[j]) {
+        arrResult[i] = '';
+      }
+    }
+  }
+  for (let i = 0; i < arrResult.length; i++) {
+    strResult += arrResult[i];
+  }
+  return strResult;
+}
+// console.log(removeThis(text, key));
+
+// this function has three top level for loops, and one nested for loop. the runtime on this function won't be excellent, but
+// it works! it avoids use of filter, split, and join as requested. it has a complexity of O(2n + n^k)
+
+// 10. products
+//Given an array of numbers, write an algorithm to find out the products of every other number except the number at each index.
+const input = [1, 3, 9, 4];
+
+function prods(arr) {
+  let result = [];
+  let mult = 1;
+  for (let i = 0; i < arr.length; i++) {
+    mult *= arr[i];
+  }
+  for (let i = 0; i < arr.length; i++) {
+    result.push(mult/arr[i]);
+  }
+  return result;
+}
+
+// console.log(prods(input));
+
+// this function has a complexity of O(n) - it is linear as it only depends on the length of a single input
+
+// 11. 2D array
+// Write an algorithm which searches through a 2D array, and whenever it finds a 0 should set the entire row and column to 0.
+
+let inputArr = [[1,0,1,1,0],
+[0,1,1,1,0],
+[1,1,1,1,1],
+[1,0,1,1,1],
+[1,1,1,1,1]];
+
+function makeZero(arr) {
+  let idx1;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] === 0) {
+        arr[i] = [0,0,0,0,0];
+        idx1 = j;
+      }
+      if (typeof idx1 === typeof 1) {
+        arr[i][j] = 0;
+      }
+    }
+    
+  }
+}
+
+console.log(makeZero(inputArr));
