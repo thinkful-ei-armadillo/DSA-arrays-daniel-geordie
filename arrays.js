@@ -113,3 +113,32 @@ main();
 // removed all indices of data and inserted 'tauhida'
 // when printed with console.log(memory.get(3)), we get NaN because strings are not numbers
 // _resize() recalibrates the this.ptr value whenever the array gets re-sized to for a new data point or one is removed.
+
+//5. urlify
+const test = 'tauhida parveen';
+const test2 = 'httsp://thinkful.com/ tau hida par veen'
+function urlify(string) {
+  let array = string.split('');
+  for(let i = 0; i < array.length; i++) {
+    if(array[i] === ' '){
+      array[i] = '%20';
+    }
+  }
+  return array.join('');
+}
+
+// console.log(urlify(test2));
+//this is a pretty linear complexitiy O(n). It cannot be more efficient as it is dependant on string length
+
+//6. filter method
+function myFilter(array, filterKey) {
+  for(let i = 0; i < array.length; i++) {
+    if(array[i] < filterKey) {
+      console.log(`filering at ${i}`);
+      array.slice(i, i+1);
+    }
+  }
+  return array;
+}
+
+console.log(myFilter([1,2,3,4,5,6,1,2,3,5,2,8,4,5,10], 5));
