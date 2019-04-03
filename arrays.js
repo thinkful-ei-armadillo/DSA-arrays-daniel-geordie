@@ -240,15 +240,16 @@ function prods(arr) {
 
 // 11. 2D array
 // Write an algorithm which searches through a 2D array, and whenever it finds a 0 should set the entire row and column to 0.
-
 let inputArr = [[1,0,1,1,0],
 [0,1,1,1,0],
 [1,1,1,1,1],
 [1,0,1,1,1],
 [1,1,1,1,1]];
 
+//we had to inject inputArr into the function because when we set resultArr to arr, it was mutating the original arr as well
+
 function makeZero(arr) {
-  let resultArr = arr;
+  let resultArr = inputArr.map(line => line.slice(0));
   let idx = [];
   // rows
   for (let i = 0; i < arr.length; i++) {
@@ -263,14 +264,31 @@ function makeZero(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
       for (let k = 0; k < idx.length; k++) {
-        if (i === idx[0]) {
+        if (j === idx[k]) {
           resultArr[i][j] = 0;
         }
       }
     }
   }
+  console.log(arr);
   return resultArr;
 }
+
 console.log(makeZero(inputArr));
 
 // 12. string rotation
+//amazon
+function stringRotation(str1, str2) {
+  let placeholder = str2;
+  for (let i =0; i < str1.length; i++){
+    if(placeholder === str1){
+      return true;
+    } else {
+      placeholder = placeholder.slice(1) + placeholder.charAt(0);
+    }
+  }
+  return false;
+}
+
+// console.log(stringRotation('amazon', 'zonama'));
+// console.log(stringRotation('amazon', 'mzaona'));
