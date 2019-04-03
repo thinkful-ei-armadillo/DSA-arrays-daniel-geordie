@@ -248,19 +248,29 @@ let inputArr = [[1,0,1,1,0],
 [1,1,1,1,1]];
 
 function makeZero(arr) {
-  let idx1;
+  let resultArr = arr;
+  let idx = [];
+  // rows
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
       if (arr[i][j] === 0) {
-        arr[i] = [0,0,0,0,0];
-        idx1 = j;
-      }
-      if (typeof idx1 === typeof 1) {
-        arr[i][j] = 0;
+        idx.push(j);
+        resultArr[i] = [0,0,0,0,0];
       }
     }
-    
+  }console.log(idx);
+  //columns
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      for (let k = 0; k < idx.length; k++) {
+        if (i === idx[0]) {
+          resultArr[i][j] = 0;
+        }
+      }
+    }
   }
+  return resultArr;
 }
-
 console.log(makeZero(inputArr));
+
+// 12. string rotation
